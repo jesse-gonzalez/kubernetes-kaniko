@@ -1,3 +1,5 @@
-FROM ubuntu:latest
+FROM node:10.15.3-stretch
 
-RUN apt-get update -y
+ADD main.js /app/main.js
+
+ENTRYPOINT [ "node", "/app/main.js" ]
