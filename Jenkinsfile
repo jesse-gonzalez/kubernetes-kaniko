@@ -10,11 +10,10 @@ podTemplate(yaml: '''
         args:
         - 99d
       - name: kaniko
-        image: gcr.io/kaniko-project/executor:debug
-        command:
-        - sleep
+        image: gcr.io/kaniko-project/executor:latest
         args:
-        - 9999999
+        - "--context=git://github.com/jesse-gonzalez/kubernetes-kaniko"
+        - "--destination=ntnxdemo/kaniko-test-image:1.0"
         volumeMounts:
         - name: kaniko-secret
           mountPath: /kaniko/.docker
@@ -39,7 +38,7 @@ podTemplate(yaml: '''
       }
     }
 
-    stage('Build Java Image') {
+    stage('Build Go Image') {
       container('kaniko') {
         stage('Build a Go project') {
           sh '''
