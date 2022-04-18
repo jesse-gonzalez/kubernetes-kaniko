@@ -10,10 +10,11 @@ podTemplate(yaml: '''
         args:
         - 99d
       - name: kaniko
-        image: gcr.io/kaniko-project/executor:latest
+        image: gcr.io/kaniko-project/executor:debug
+        command:
+        - sleep
         args:
-        - "--context=git://github.com/jesse-gonzalez/kubernetes-kaniko"
-        - "--destination=ntnxdemo/kaniko-test-image:1.0"
+        - 9999999
         volumeMounts:
         - name: kaniko-secret
           mountPath: /kaniko/.docker
